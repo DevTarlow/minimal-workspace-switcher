@@ -1,0 +1,7 @@
+{
+  "uuid": "minimal-workspace-switcher@mossaistudio.com",
+  "name": "Minimal Workspace Switcher",
+  "description": "Minimal clickable workspace boxes on the top bar, built by Moss AI Studio.",
+  "shell-version": [ "45", "46", "47", "48", "49", "50" ],
+  "url": ""
+}
