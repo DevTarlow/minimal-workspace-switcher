@@ -1,16 +1,21 @@
 # Minimal Workspace Switcher
 
-A tiny GNOME Shell extension that puts clickable workspace boxes in the top bar. One box per workspace, click to switch. The active workspace is highlighted in blue.
+A small GNOME Shell extension that shows one clickable box for each of your workspaces in the top bar. The box for the workspace you are on is blue. Click any other box to jump to that workspace.
 
-Built for GNOME Shell 45 through 50 (Ubuntu 24.04 and newer). Tested on GNOME Shell 50.1.
+Works with GNOME Shell 45 through 50 (Ubuntu 24.04 and newer). Tested on GNOME Shell 50.1.
+
+## What you need before you start
+
+- Ubuntu 24.04 or newer, or another setup running GNOME Shell 45 to 50.
+- A log out and back in after installing. GNOME Shell reads extension folders when you log in, so new extensions show up after a restart of your session.
 
 ## Install
 
-GNOME Shell only reads extension folders when your session starts, so log out and back in after copying the files.
+Pick one way to get the files in place. Both put the same three files into the same folder.
 
-### Terminal way (easiest)
+### Way 1: terminal (copy-paste)
 
-Open a terminal and paste these lines one after another. They work from any folder:
+Open a terminal and paste these lines one after another:
 
 ```bash
 git clone https://github.com/DevTarlow/minimal-workspace-switcher.git
@@ -19,35 +24,55 @@ mkdir -p ~/.local/share/gnome-shell/extensions/minimal-workspace-switcher@mossai
 cp extension.js metadata.json stylesheet.css ~/.local/share/gnome-shell/extensions/minimal-workspace-switcher@mossaistudio.com/
 ```
 
-Notes:
+A note on the copy line: it looks for the files in whatever folder your terminal is in. The `cd` line above moves you into the cloned folder first, which is why the copy works. If you run the copy from your home folder you will see "cp: cannot stat 'extension.js': No such file or directory".
 
-- The `cp` line only works when your terminal is inside the `minimal-workspace-switcher` folder, which is what the `cd` line does. Running it from your home folder gives "cp: cannot stat 'extension.js': No such file or directory".
-- Downloaded the ZIP instead of using git clone? Extract it, then open a terminal inside the extracted folder and run the `mkdir` and `cp` lines there.
-- The folder name must match the uuid in `metadata.json` exactly.
+Downloaded the ZIP instead of using git clone? Extract it, open a terminal inside the extracted folder, and run the `mkdir` and `cp` lines there.
 
-Then log out and back in (top-right menu > Log Out), and confirm it loaded:
+### Way 2: files by hand
 
-```bash
-gnome-extensions info minimal-workspace-switcher@mossaistudio.com
+Create this folder:
+
+```
+~/.local/share/gnome-shell/extensions/minimal-workspace-switcher@mossaistudio.com
 ```
 
-You want to see `State: ACTIVE`. If it shows `State: INACTIVE`, enable it:
+Then copy these three files into it: `extension.js`, `metadata.json`, `stylesheet.css`.
+
+The folder name must match the uuid written inside `metadata.json`. Keep it exactly as shown.
+
+## Turn it on
+
+Log out and back in (top-right menu, Log Out), then switch the extension on.
+
+In the Extensions app:
+
+1. Open the Extensions app. Search for "Extensions", or click the puzzle piece icon on the top bar.
+2. Find **Minimal Workspace Switcher** in the list.
+3. Flip its switch to on. If every extension in the list is greyed out, turn on the master switch at the top of the window first.
+
+Or with a terminal:
 
 ```bash
 gnome-extensions enable minimal-workspace-switcher@mossaistudio.com
 ```
 
-### Manual way
+Check that it loaded:
 
-Create the folder `~/.local/share/gnome-shell/extensions/minimal-workspace-switcher@mossaistudio.com/` and copy the three files (`extension.js`, `metadata.json`, `stylesheet.css`) into it. Then log out and back in.
+```bash
+gnome-extensions info minimal-workspace-switcher@mossaistudio.com
+```
 
-## Usage
+You want to see `State: ACTIVE`.
 
-Numbered boxes appear on the right side of the top bar. The blue box is the workspace you are on. Click any box to jump to that workspace.
+## Using it
+
+- The top bar shows one box per workspace, numbered 1, 2, 3 and so on.
+- The blue box is the workspace you are looking at now.
+- Hover over a box to highlight it, and click to move to that workspace.
 
 ## Updating
 
-Inside the `minimal-workspace-switcher` folder from the install above, run:
+Inside the `minimal-workspace-switcher` folder from the install above:
 
 ```bash
 git pull
@@ -56,20 +81,23 @@ cp extension.js metadata.json stylesheet.css ~/.local/share/gnome-shell/extensio
 
 Then log out and back in.
 
-## Uninstall
+## Turning it off or removing it
+
+To turn it off: flip the switch off in the Extensions app, or run:
 
 ```bash
 gnome-extensions disable minimal-workspace-switcher@mossaistudio.com
-rm -rf ~/.local/share/gnome-shell/extensions/minimal-workspace-switcher@mossaistudio.com
 ```
 
-## Files
+To remove it completely, delete the folder `~/.local/share/gnome-shell/extensions/minimal-workspace-switcher@mossaistudio.com`, then log out and back in.
 
-- `extension.js` - the extension logic (ESM, no build step)
-- `metadata.json` - extension manifest (uuid must match the folder name)
-- `stylesheet.css` - the box styling
+## Files in this repo
+
+- `extension.js`: the extension code. Modern JavaScript, no build step needed.
+- `metadata.json`: describes the extension. The uuid inside must match the install folder name.
+- `stylesheet.css`: how the boxes look.
 
 ## Notes
 
-- Works on Wayland and X11.
-- GNOME Shell versions 45 to 50 are declared in `metadata.json`; on an older shell (Ubuntu 22.04 or earlier) it will not load.
+- Works on both Wayland and X11 sessions.
+- The supported GNOME Shell versions are listed in `metadata.json`. On an older shell (Ubuntu 22.04 or earlier) the extension will not load.
