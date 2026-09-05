@@ -4,6 +4,12 @@ A small GNOME Shell extension that shows one clickable box for each of your work
 
 Works with GNOME Shell 45 through 50 (Ubuntu 24.04 and newer). Tested on GNOME Shell 50.1.
 
+## Screenshot
+
+The workspace boxes in the top bar. Workspace 2 is active (blue).
+
+![Minimal Workspace Switcher screenshot](screenshot.png)
+
 ## What you need before you start
 
 - Ubuntu 24.04 or newer, or another setup running GNOME Shell 45 to 50.
